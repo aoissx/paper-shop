@@ -34,8 +34,8 @@ public final class Paper_slot extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public static Paper_slot getInstance() {
-        return getPlugin(Paper_slot.class);
+    public static Plugin getInstance() {
+        return plugin;
     }
 
     /*

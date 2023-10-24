@@ -21,6 +21,7 @@ public class ChestDao extends Base {
             stmt.setInt(3, c.getZ());
             stmt.setString(4, c.getWorldName());
             stmt.setInt(5, c.getBet());
+            stmt.executeUpdate();
         } catch (SQLException e) {
             getPlugin().getLogger().info("Error inserting chest: " + e.getMessage());
         }

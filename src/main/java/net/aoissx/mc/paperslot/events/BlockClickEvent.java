@@ -70,10 +70,8 @@ public class BlockClickEvent implements Listener {
                     }
                 }
             }
-        }
-        else {// 一般ユーザ
+        }else {// 一般ユーザ
             // チェストをクリックしたとき
-            if(!tags.contains(Config.Tags.SLOT_PLAYING_TAG.toString())){
                 // チェストをクリックしたとき
                 Block block = event.getClickedBlock();
                 if(block!=null){
@@ -104,7 +102,7 @@ public class BlockClickEvent implements Listener {
                         // player ni effect
                         Location loc = block.getLocation();
                         loc.getWorld().spawnParticle(org.bukkit.Particle.VILLAGER_HAPPY, loc, 10);
-                    }
+                    
                 }
             }
 

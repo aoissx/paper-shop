@@ -57,7 +57,7 @@ public class Slot implements CommandExecutor {
         }else if(subCmd.equalsIgnoreCase(Config.SUB_CMD.RELOAD.toString())){
             // reload command
             p.sendMessage(Config.text("Reload config."));
-            Paper_slot.getInstance().reload();
+            Paper_slot.getInstance().reloadConfig();
             p.sendMessage(Config.text("Before: "+Config.bet));
             p.sendMessage(Config.text("After: "+Config.bet));
 
