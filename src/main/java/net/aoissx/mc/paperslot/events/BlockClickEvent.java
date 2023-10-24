@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+
 import net.aoissx.mc.paperslot.db.Chest;
 import net.aoissx.mc.paperslot.db.ChestDao;
 import net.aoissx.mc.paperslot.utils.Config;
@@ -95,6 +97,13 @@ public class BlockClickEvent implements Listener {
                         // GUIを表示
                         
                         Gui gui = new Gui(bet);
+                        gui.createGui();
+                        Inventory inv = gui.getInventory();
+                        player.openInventory(inv);
+
+                        // player ni effect
+                        Location loc = block.getLocation();
+                        loc.getWorld().spawnParticle(org.bukkit.Particle.VILLAGER_HAPPY, loc, 10);
                     }
                 }
             }
