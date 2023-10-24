@@ -1,10 +1,9 @@
-package net.isksss.mc.paperslot;
+package net.aoissx.mc.paperslot;
 
-import net.isksss.mc.paperslot.commands.Slot;
-import net.isksss.mc.paperslot.db.Init;
-import net.isksss.mc.paperslot.utils.Config;
 import org.bukkit.plugin.java.JavaPlugin;
-
+import net.aoissx.mc.paperslot.commands.Slot;
+import net.aoissx.mc.paperslot.db.Init;
+import net.aoissx.mc.paperslot.utils.Config;
 import java.util.Objects;
 
 public final class Paper_slot extends JavaPlugin {

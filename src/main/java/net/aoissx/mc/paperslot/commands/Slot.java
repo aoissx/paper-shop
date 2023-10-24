@@ -1,6 +1,6 @@
-package net.isksss.mc.paperslot.commands;
+package net.aoissx.mc.paperslot.commands;
 
-import net.isksss.mc.paperslot.utils.Config;
+import net.aoissx.mc.paperslot.utils.Config;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;

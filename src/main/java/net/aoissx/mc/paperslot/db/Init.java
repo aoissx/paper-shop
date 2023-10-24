@@ -1,4 +1,4 @@
-package net.isksss.mc.paperslot.db;
+package net.aoissx.mc.paperslot.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

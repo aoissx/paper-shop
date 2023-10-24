@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'net.isksss.mc'
+group = 'net.aoissx.mc'
 version = '1.0-SNAPSHOT'
 
 repositories {

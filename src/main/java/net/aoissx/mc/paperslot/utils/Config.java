@@ -1,4 +1,4 @@
-package net.isksss.mc.paperslot.utils;
+package net.aoissx.mc.paperslot.utils;
 
 import net.kyori.adventure.text.Component;
 

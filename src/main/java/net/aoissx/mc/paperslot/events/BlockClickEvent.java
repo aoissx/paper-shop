@@ -1,8 +1,4 @@
-package net.isksss.mc.paperslot.events;
-
-import net.isksss.mc.paperslot.db.Chest;
-import net.isksss.mc.paperslot.db.ChestDao;
-import net.isksss.mc.paperslot.utils.Config;
+package net.aoissx.mc.paperslot.events;
 
 import org.bukkit.Location;
 
@@ -11,6 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import net.aoissx.mc.paperslot.db.Chest;
+import net.aoissx.mc.paperslot.db.ChestDao;
+import net.aoissx.mc.paperslot.utils.Config;
 import java.util.List;
 import java.util.Set;
 

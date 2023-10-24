@@ -1,6 +1,6 @@
-package net.isksss.mc.paperslot.db;
+package net.aoissx.mc.paperslot.db;
 
-import net.isksss.mc.paperslot.Paper_slot;
+import net.aoissx.mc.paperslot.Paper_slot;
 
 public class Base {
     private final String path = "jdbc:sqlite:plugins/paper-slot/slot.db";
