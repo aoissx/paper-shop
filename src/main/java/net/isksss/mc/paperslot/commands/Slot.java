@@ -43,13 +43,8 @@ public class Slot implements CommandExecutor {
             // add command
             if(args.length >= 2){
                 add(p);
-                // 棒を追加
-                ItemStack stick = new ItemStack(Material.STICK);
-                ItemMeta meta = stick.getItemMeta();
-                meta.displayName(Component.text("SettingStick").color(TextColor.color(255,0,0)));
-                meta.lore((List<? extends Component>) Component.text(args[1]));
-                stick.setItemMeta(meta);
-                p.getInventory().addItem(stick);
+                Config.bet = Integer.parseInt(args[1]);
+                p.sendMessage(Config.text("Set bet: "+Config.bet));
             }else{
                 p.sendMessage(Config.error("Not enough Args"));
                 return false;

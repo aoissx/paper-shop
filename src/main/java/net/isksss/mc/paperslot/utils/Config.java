@@ -3,7 +3,7 @@ package net.isksss.mc.paperslot.utils;
 import net.kyori.adventure.text.Component;
 
 public class Config {
-
+    public static int bet = 1;
     public static final String CMD = "slot";
     public static enum SUB_CMD {
         ADD,

@@ -1,20 +1,17 @@
 package net.isksss.mc.paperslot.events;
 
+import net.isksss.mc.paperslot.db.Chest;
+import net.isksss.mc.paperslot.db.ChestDao;
 import net.isksss.mc.paperslot.utils.Config;
-import net.kyori.adventure.text.Component;
+
 import org.bukkit.Location;
-import org.bukkit.Material;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public class BlockClickEvent implements Listener {
@@ -36,28 +33,40 @@ public class BlockClickEvent implements Listener {
                 //　登録モード
 
                 //bet取得
-                ItemStack offhand = player.getInventory().getItemInOffHand();
-                int bet = 1;
-                if(offhand.getType() != Material.STICK){
-                    player.sendMessage(Config.error("オフハンドに棒を持ってください"));
-                    return;
-                }else{
-                    ItemMeta meta = offhand.getItemMeta();
-                    String betStr = Objects.requireNonNull(meta.displayName()).toString();
-                    bet = Integer.parseInt(betStr);
-                }
+                int bet = Config.bet;
+
                 Block block = event.getClickedBlock();
                 if(block!=null){
                     // 登録
-                    if(register(block,bet)){
+                    boolean regist = register(block,bet);
+                    if(regist){
                         //登録完了メッセージ
-                        player.sendMessage(Config.text("登録できました。"));
+                        player.sendMessage(Config.text("登録できました。BET: "+bet+" level"));
+
+                        // blockのLocにエフェクトを表示
+                        Location loc = block.getLocation();
+                        loc.getWorld().spawnParticle(org.bukkit.Particle.VILLAGER_HAPPY, loc, 10);
                     }else{
                         player.sendMessage(Config.error("登録できませんでした。"));
                     }
                 }
             }else if(tags.contains(Config.Tags.SLOT_REMOVE_TAG.toString())){
                 // 削除モード
+
+                Block block = event.getClickedBlock();
+                if(block!=null){
+                    // 削除
+                    boolean delete = delete(block);
+                    if(delete){
+                        //削除完了メッセージ
+                        player.sendMessage(Config.text("削除できました。"));
+                        // blockのLocにエフェクトを表示
+                        Location loc = block.getLocation();
+                        loc.getWorld().spawnParticle(org.bukkit.Particle.VILLAGER_HAPPY, loc, 10);
+                    }else{
+                        player.sendMessage(Config.error("削除できませんでした。"));
+                    }
+                }
             }
         }
         else {// 一般ユーザ
@@ -71,6 +80,50 @@ public class BlockClickEvent implements Listener {
     private boolean register(Block block, int bet){
         Location loc = block.getLocation();
 
+        int x = loc.getBlockX();
+        int y = loc.getBlockY();
+        int z = loc.getBlockZ();
+        String worldName = loc.getWorld().getName();
+        Chest chest = new Chest(0,x,y,z,worldName,bet);
+
+        // すでに存在するか確認
+        ChestDao dao = new ChestDao();
+        Chest searchChest = new Chest();
+        searchChest.setX(x);
+        searchChest.setY(y);
+        searchChest.setZ(z);
+        searchChest.setWorldName(worldName);
+        if(dao.searchByLoc(searchChest).size() > 0){
+            return false;
+        }
+
+        // 登録
+        dao.insert(chest);
+
+        return true;
+    }
+
+    /*
+     * スロットを削除する処理。
+     */
+    public boolean delete(Block b){
+        ChestDao dao = new ChestDao();
+        Chest chest = new Chest();
+        chest.setX(b.getX());
+        chest.setY(b.getY());
+        chest.setZ(b.getZ());
+        chest.setWorldName(b.getWorld().getName());
+        
+        // chestが存在するか確認
+        List<Chest> chests = dao.searchByLoc(chest);
+        if(chests.size() == 0){
+            return false;
+        }
+
+        chest = chests.get(0);
+
+        // 削除
+        dao.delete(chest);
 
         return true;
     }
