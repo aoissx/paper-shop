@@ -30,5 +30,9 @@ public class Config {
         return Component.text("§c§l[PaperSlot] §r§c"+msg);
     }
 
+    public static Component simpleText(String msg){
+        return Component.text(msg);
+    }
+
 
 }
