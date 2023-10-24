@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import net.aoissx.mc.paperslot.db.Chest;
 import net.aoissx.mc.paperslot.db.ChestDao;
 import net.aoissx.mc.paperslot.utils.Config;
+import net.aoissx.mc.paperslot.utils.Gui;
 import java.util.List;
 import java.util.Set;
 
@@ -69,6 +70,34 @@ public class BlockClickEvent implements Listener {
             }
         }
         else {// 一般ユーザ
+            // チェストをクリックしたとき
+            if(!tags.contains(Config.Tags.SLOT_PLAYING_TAG.toString())){
+                // チェストをクリックしたとき
+                Block block = event.getClickedBlock();
+                if(block!=null){
+                    ChestDao dao = new ChestDao();
+                    Chest chest = new Chest();
+                    chest.setX(block.getX());
+                    chest.setY(block.getY());
+                    chest.setZ(block.getZ());
+                    chest.setWorldName(block.getWorld().getName());
+                    List<Chest> chests = dao.searchByLoc(chest);
+                    if(chests.size() > 0){
+                        // チェストが存在する
+                        // eventをキャンセル
+                        event.setCancelled(true);
+                        // Playerにタグをつける
+                        player.addScoreboardTag(Config.Tags.SLOT_PLAYING_TAG.toString());
+                        // チェストを取得
+                        chest = chests.get(0);
+                        // チェストのBETを取得
+                        int bet = chest.getBet();
+                        // GUIを表示
+                        
+                        Gui gui = new Gui(bet);
+                    }
+                }
+            }
 
         }
     }
