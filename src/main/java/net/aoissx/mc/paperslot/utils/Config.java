@@ -8,6 +8,7 @@ public class Config {
     public static enum SUB_CMD {
         ADD,
         REMOVE,
+        RELOAD,
         HELP,
         LIST
     };

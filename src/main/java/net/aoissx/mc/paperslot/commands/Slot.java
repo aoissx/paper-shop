@@ -1,5 +1,6 @@
 package net.aoissx.mc.paperslot.commands;
 
+import net.aoissx.mc.paperslot.Paper_slot;
 import net.aoissx.mc.paperslot.utils.Config;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -53,6 +54,13 @@ public class Slot implements CommandExecutor {
         }else if(subCmd.equalsIgnoreCase(Config.SUB_CMD.REMOVE.toString())){
             // remove command
             remove(p);
+        }else if(subCmd.equalsIgnoreCase(Config.SUB_CMD.RELOAD.toString())){
+            // reload command
+            p.sendMessage(Config.text("Reload config."));
+            Paper_slot.getInstance().reload();
+            p.sendMessage(Config.text("Before: "+Config.bet));
+            p.sendMessage(Config.text("After: "+Config.bet));
+
         }
 
         return true;

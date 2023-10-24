@@ -12,6 +12,7 @@ public final class Paper_slot extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         saveDefaultConfig();
+        reload();
         
         // database
         Init init = new Init();
@@ -28,5 +29,13 @@ public final class Paper_slot extends JavaPlugin {
 
     public static Paper_slot getInstance() {
         return getPlugin(Paper_slot.class);
+    }
+
+    /*
+     * config reload
+     */
+    public void reload(){
+        reloadConfig();
+        Config.bet = getConfig().getInt("bet");
     }
 }
